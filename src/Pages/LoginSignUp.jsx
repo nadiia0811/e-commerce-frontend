@@ -31,11 +31,12 @@ const LoginSignUp = () => {
       },
       body: JSON.stringify(formData),
     })
-    .then(res => res.json())
+    .then(response => console.log(response.json()))
+  /*   .then(res => res.json())
     .then(data => (responseData = data)) 
   } catch(err) {
     console.log(err)
-  }
+  } */
 
   if(responseData.success) {
     localStorage.setItem("auth-token", responseData.token);
