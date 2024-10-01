@@ -33,7 +33,7 @@ const ShopContextProvider = (props) => {
 
       const fetchData = async () => {
         try {
-         await fetch("http://localhost:4000/allproducts")
+         await fetch(`${API_BASE_URL}/allproducts`)
                    .then(res => res.json())
                    .then(data => setAllProducts(data))     
         } catch(err) {
@@ -41,14 +41,14 @@ const ShopContextProvider = (props) => {
         }     
        } 
     fetchData();   
-   }, []);
+   }, [API_BASE_URL]);
 
 
    const addToCart = (itemId) => {
     setCartItems((prev) => ({...prev, [itemId]:prev[itemId]+1}));
     if(localStorage.getItem("auth-token")) {
       try {
-         fetch("http://localhost:4000/addtocart", {
+         fetch(`${API_BASE_URL}/addtocart`, {
             method: 'POST',
             headers : {
                Accept: "application/json",
@@ -69,7 +69,7 @@ const ShopContextProvider = (props) => {
       setCartItems((prev) => ({...prev, [itemId]:prev[itemId]-1}));
       if(localStorage.getItem("auth-token")) {
          try {
-            fetch("http://localhost:4000/removefromcart" , {
+            fetch(`${API_BASE_URL}/removefromcart` , {
                method:'POST',
                headers: {
                   Accept:"application/json",

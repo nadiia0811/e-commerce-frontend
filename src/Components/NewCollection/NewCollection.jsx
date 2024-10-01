@@ -19,7 +19,7 @@ const NewCollection = ({collectionRef}) => {
       }
 
       getNewCollection();
-  }, []);
+  }, [API_BASE_URL]);
 
     
   return (
