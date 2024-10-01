@@ -32,7 +32,7 @@ const LoginSignUp = () => {
       body: JSON.stringify(formData),
     })
     .then(response => console.log(response.json()))
-    .then(data => (respondeData=data))
+    .then(data => (responseData=data))
   } catch(err) {
      console.log(err)
   }
