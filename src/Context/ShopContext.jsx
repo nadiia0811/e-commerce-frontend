@@ -11,14 +11,14 @@ const getDefaultCart = () => {
 }
 
 const ShopContextProvider = (props) => {
-   const API_BASE_URL=process.env.API_BASE_URL;
+   const REACT_APP_API_BASE_URL=process.env.REACT_APP_API_BASE_URL;
    const[cartItems, setCartItems] = useState(getDefaultCart());
    const [allProducts, setAllProducts] = useState([]);
 
      useEffect(() => { 
 
       if(localStorage.getItem("auth-token")) {
-         fetch(`${API_BASE_URL}/getcart`, {
+         fetch(`${REACT_APP_API_BASE_URL}/getcart`, {
             method: 'POST',
             headers : {
                Accept: "application/json",
@@ -33,7 +33,7 @@ const ShopContextProvider = (props) => {
 
       const fetchData = async () => {
         try {
-         await fetch(`${API_BASE_URL}/allproducts`)
+         await fetch(`${REACT_APP_API_BASE_URL}/allproducts`)
                    .then(res => res.json())
                    .then(data => setAllProducts(data))     
         } catch(err) {
@@ -41,14 +41,14 @@ const ShopContextProvider = (props) => {
         }     
        } 
     fetchData();   
-   }, [API_BASE_URL]);
+   }, [REACT_APP_API_BASE_URL]);
 
 
    const addToCart = (itemId) => {
     setCartItems((prev) => ({...prev, [itemId]:prev[itemId]+1}));
     if(localStorage.getItem("auth-token")) {
       try {
-         fetch(`${API_BASE_URL}/addtocart`, {
+         fetch(`${REACT_APP_API_BASE_URL}/addtocart`, {
             method: 'POST',
             headers : {
                Accept: "application/json",
@@ -69,7 +69,7 @@ const ShopContextProvider = (props) => {
       setCartItems((prev) => ({...prev, [itemId]:prev[itemId]-1}));
       if(localStorage.getItem("auth-token")) {
          try {
-            fetch(`${API_BASE_URL}/removefromcart` , {
+            fetch(`${REACT_APP_API_BASE_URL}/removefromcart` , {
                method:'POST',
                headers: {
                   Accept:"application/json",

@@ -5,12 +5,12 @@ import './NewCollection.css';
 const NewCollection = ({collectionRef}) => {
 
   const [newCollection, setNewCollection] = useState([]);
-  const API_BASE_URL=process.env.API_BASE_URL;
+  const REACT_APP_API_BASE_URL=process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const getNewCollection = async () => {
       try {
-        await fetch(`${API_BASE_URL}/newcollection`)
+        await fetch(`${REACT_APP_API_BASE_URL}/newcollection`)
         .then(res => res.json())
         .then(data => setNewCollection(data))
           } catch(err) {
@@ -19,7 +19,7 @@ const NewCollection = ({collectionRef}) => {
       }
 
       getNewCollection();
-  }, [API_BASE_URL]);
+  }, [REACT_APP_API_BASE_URL]);
 
     
   return (

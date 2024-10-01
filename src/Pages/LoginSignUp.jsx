@@ -9,7 +9,7 @@ const LoginSignUp = () => {
     email: "",
     password: ""
   });
-  const API_BASE_URL = process.env.API_BASE_URL;
+  const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const toggleLoginSignup = () => {
     state === "Login" ? setState("Sign Up") : setState("Login")
@@ -23,7 +23,7 @@ const LoginSignUp = () => {
  
     let responseData;
     try {
-    await fetch(`${API_BASE_URL}/login`, {
+    await fetch(`${REACT_APP_API_BASE_URL}/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -48,7 +48,7 @@ const LoginSignUp = () => {
   const signup = async () => {
     let responseData;
     try {
-    await fetch(`${API_BASE_URL}/signup`, {
+    await fetch(`${REACT_APP_API_BASE_URL}/signup`, {
       method: "POST",
       headers: {
         Accept: "application/json",
