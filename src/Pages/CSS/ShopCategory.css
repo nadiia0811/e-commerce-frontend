@@ -1,0 +1,121 @@
+.shopcategory-banner {
+    display: block;
+    margin: 30px auto;
+    width: 85%;
+}
+
+.shopcategory-indexsort {
+    display: flex;
+    margin: 20px 170px 30px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shopcategory-sort {
+   padding: 10px 20px;
+   border-radius: 40px;
+   border: 1px solid #888;
+   cursor: pointer;
+}
+
+.shopcategory-sort img {
+    margin-left: 8px;
+}
+
+.shopcategory-indexsort p span {
+  font-weight: 600;
+} 
+
+.shopcategory-products {
+    margin: 20px 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 50px;   
+}
+
+.shopcategory-loadmore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 150px auto;
+    width: 233px;
+    height: 70px;
+    border-radius: 35px;
+    background: #ededed;
+    color: #444141;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+@media(max-width: 1280px) {
+    .shopcategory-banner {
+        margin: 20px auto;
+        width: 90%;
+    }
+    .shopcategory-indexsort {
+        width: 90%;
+        margin: auto;
+    }
+    .shopcategory-sort {
+        padding: 5px 10px;
+    }
+    .shopcategory-indexsort p {
+        font-size: 15px;
+    }
+    .shopcategory-products {
+       width: 90%;
+       margin: 10px auto;
+       row-gap: 40px;
+    }
+    .shopcategory-products .item {
+        margin: auto;
+    }
+    .shopcategory-loadmore {
+        margin: 80px auto;
+        width: 200px;
+        height: 60px;      
+        font-size: 16px;
+    }
+}
+
+@media(max-width: 800px) {
+    .shopcategory-banner {
+        width: 95%;
+    }
+    .shopcategory-products {
+        width: 95%;
+    }
+    .shopcategory-loadmore {
+        margin: 60px auto;
+        width: 160px;
+        height: 50px;      
+        font-size: 14px;
+    } 
+}
+
+@media(max-width: 500px) {
+    .shopcategory-banner {
+        width: 100%;
+    }
+    .shopcategory-products {
+       
+    }
+    .shopcategory-loadmore {
+        margin: 60px auto;
+        width: 160px;
+        height: 50px;      
+        font-size: 14px;
+    } 
+    .shopcategory-sort {
+        font-size: 12px;
+    }
+    .shopcategory-indexsort p {
+        font-size: 13px;
+    }
+    .shopcategory-products {
+        grid-template-columns: 1fr 1fr;
+        margin-top: 25px;
+        gap: 15px;
+    }
+}
