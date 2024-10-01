@@ -30,17 +30,11 @@ const LoginSignUp = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    })
-    .then(response => console.log(response.json()))
-    .then(data => (responseData=data))
-  } catch(err) {
-     console.log(err)
-  }
-  /*   .then(res => res.json())
-    .then(data => (responseData = data)) 
+    }).then(res => res.json())
+      .then(data => (responseData = data)) 
   } catch(err) {
     console.log(err)
-  } */
+  } 
 
   if(responseData.success) {
     localStorage.setItem("auth-token", responseData.token);
