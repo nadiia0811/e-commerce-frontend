@@ -48,7 +48,7 @@ const LoginSignUp = () => {
   const signup = async () => {
     let responseData;
     try {
-    await fetch("http://localhost:4000/signup", {
+    await fetch(`${API_BASE_URL}/signup`, {
       method: "POST",
       headers: {
         Accept: "application/json",
