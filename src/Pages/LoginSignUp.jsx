@@ -32,6 +32,7 @@ const LoginSignUp = () => {
       body: JSON.stringify(formData),
     })
     .then(response => console.log(response.json()))
+    .catch(err => console.log(err))
   /*   .then(res => res.json())
     .then(data => (responseData = data)) 
   } catch(err) {
