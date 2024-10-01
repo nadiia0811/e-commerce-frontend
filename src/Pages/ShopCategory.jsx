@@ -6,13 +6,13 @@ import './CSS/ShopCategory.css';
 
 const ShopCategory = ({category, banner}) => { 
 
-
+  const API_BASE_URL= process.env.API_BASE_URL;
   const {allProducts} = useContext(ShopContext);
   const [catSort, setCatSort] = useState([]);
 
    const sort = async () => {
     try {
-      await fetch("http://localhost:4000/sort", {
+      await fetch(`${API_BASE_URL}/sort`, {
         method: 'POST',
         headers: {
           Accept: "application/json",
@@ -26,8 +26,6 @@ const ShopCategory = ({category, banner}) => {
       console.log("Error: " + err)
     }
   }; 
-
-
 
   return (
     <div className='shop-category'>
@@ -63,20 +61,7 @@ const ShopCategory = ({category, banner}) => {
             return null;
            }
         }) )} 
-      
-       
-         {/* {allProducts.map((item, i) => {
-           if(category === item.category) { 
-              return <Item key = {i}
-                           id={item.id}
-                           name={item.name}
-                           image={item.image}
-                           new_price={item.new_price}
-                           old_price={item.old_price} />
-           } else {
-            return null;
-           }
-        })} */}  
+    
       </div>
       <div className="shopcategory-loadmore">Explore More</div>
     </div>

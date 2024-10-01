@@ -11,13 +11,14 @@ const getDefaultCart = () => {
 }
 
 const ShopContextProvider = (props) => {
+   const API_BASE_URL=process.env.API_BASE_URL;
    const[cartItems, setCartItems] = useState(getDefaultCart());
-    const [allProducts, setAllProducts] = useState([]);
+   const [allProducts, setAllProducts] = useState([]);
 
      useEffect(() => { 
 
       if(localStorage.getItem("auth-token")) {
-         fetch("http://localhost:4000/getcart", {
+         fetch(`${API_BASE_URL}/getcart`, {
             method: 'POST',
             headers : {
                Accept: "application/json",

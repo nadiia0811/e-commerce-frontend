@@ -1,6 +1,6 @@
 
 # dependencies
-/node_modules
+/node_modules/
 /.pnp
 .pnp.js
 .env
@@ -11,6 +11,8 @@
 
 # production
 /build
+dist/
+upload/
 
 # misc
 .DS_Store

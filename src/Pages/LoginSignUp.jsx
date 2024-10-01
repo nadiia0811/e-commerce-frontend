@@ -9,6 +9,7 @@ const LoginSignUp = () => {
     email: "",
     password: ""
   });
+  const API_BASE_URL = process.env.API_BASE_URL;
 
   const toggleLoginSignup = () => {
     state === "Login" ? setState("Sign Up") : setState("Login")
@@ -22,7 +23,7 @@ const LoginSignUp = () => {
  
     let responseData;
     try {
-    await fetch("http://localhost:4000/login", {
+    await fetch(`${API_BASE_URL}/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",
