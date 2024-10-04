@@ -9,6 +9,10 @@ const ShopCategory = ({category, banner}) => {
   const REACT_APP_API_BASE_URL= process.env.REACT_APP_API_BASE_URL;
   const {allProducts} = useContext(ShopContext);
   const [catSort, setCatSort] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(8);
+
+  const filtered = allProducts.filter((item) => item.category === category);
+  const count = <span>{`1 - ${visibleCount}`}</span>;
 
    const sort = async () => {
     try {
@@ -27,12 +31,20 @@ const ShopCategory = ({category, banner}) => {
     }
   }; 
 
+  const handleExploreMore = () => {
+    const scrollPosition = window.scrollY; 
+    setVisibleCount(prev => prev + 4);
+    setTimeout(() => {
+      window.scrollTo(0, scrollPosition); 
+    }, 0);
+  }
+
   return (
-    <div className='shop-category'>
+    <div className="shop-category">
       <img className = "shopcategory-banner" src={banner} alt="" /> 
       <div className="shopcategory-indexsort">
         <p>
-          <span>Showing 1 - 12</span> out of 36 products
+          <span>Showing {count} </span> out of 12 products
         </p>
         <div className="shopcategory-sort"  onClick={sort}>
           Sort by price <img src={dropdown_icon} alt='Dropdown icon'/>
@@ -49,21 +61,20 @@ const ShopCategory = ({category, banner}) => {
                         new_price={item.new_price}
                         old_price={item.old_price} /> }) ) : 
 
-           (allProducts.map((item, i) => {
-           if(category === item.category) { 
-              return <Item key = {i}
-                           id={item.id}
-                           name={item.name}
-                           image={item.image}
-                           new_price={item.new_price}
-                           old_price={item.old_price} />
-           } else {
-            return null;
-           }
-        }) )} 
+          ( filtered.slice(0, visibleCount)
+                    .map((item, index) =>  <Item key = {index}
+                                                 id={item.id}
+                                                 name={item.name}
+                                                 image={item.image}
+                                                 new_price={item.new_price}
+                                                 old_price={item.old_price} />) )
+
+        } 
     
       </div>
-      <div className="shopcategory-loadmore">Explore More</div>
+      {visibleCount < filtered.length && <div className="shopcategory-loadmore"
+                                              onClick={handleExploreMore}>Explore More
+                                         </div>}
     </div>
   )
 };

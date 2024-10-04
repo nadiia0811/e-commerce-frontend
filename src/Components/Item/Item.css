@@ -1,6 +1,14 @@
 .item {
     width: 350px; 
+    opacity: 0;
+    transform: translateY(5);
+    transition: opacity 1s ease-out, transform 1s ease-out;    
 }
+
+.item.fade-in {
+    opacity: 1; 
+    transform: translateY(0);  
+} 
 
 .item img {
     width: 100%;

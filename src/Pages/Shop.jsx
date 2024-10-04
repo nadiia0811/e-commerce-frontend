@@ -8,7 +8,7 @@ import NewsLetter from '../Components/NewsLetter/NewsLetter';
 
 const Shop = () => {
 
-  const collectionRef = useRef(null);//
+  const collectionRef = useRef(null);
   
   const scrollToCollection = () => {
     if (collectionRef.current) {

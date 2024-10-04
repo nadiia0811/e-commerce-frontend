@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Item = ({id, image, name, old_price, new_price}) => {  
   return (
-    <div className='item'>
+    <div className="item fade-in">
       <Link to={`/product/${id}`}><img src={image} alt="" onClick={window.scrollTo(0,0)}/></Link>     
       <p>{name}</p>
       <div className="item-prices">
