@@ -5,7 +5,6 @@ import Item from '../Item/Item';
 const Popular = () => {
   const [popularProducts, setPopularProducts] = useState([]);
   const REACT_APP_API_BASE_URL= process.env.REACT_APP_API_BASE_URL;
-  console.log("API_BASE_URL: ", REACT_APP_API_BASE_URL)
 
   useEffect(() => {
     const getPopular = async () => {

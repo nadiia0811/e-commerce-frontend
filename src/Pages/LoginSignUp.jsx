@@ -20,28 +20,39 @@ const LoginSignUp = () => {
   }
 
   const login = async () => {
- 
-    let responseData;
+    let responseData, response;
     try {
-    await fetch(`${REACT_APP_API_BASE_URL}/login`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    }).then(res => res.json())
-      .then(data => (responseData = data)) 
-  } catch(err) {
-    console.log(err)
-  } 
+       response = await fetch(`${REACT_APP_API_BASE_URL}/login`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to login");
+      }
+      console.log("response:", response) //ok
+      responseData = await response.json();
+      console.log("responseData:", responseData)
+      //return responseData; /////
+      if(responseData.success) {  //was success
+        localStorage.setItem("auth-token", responseData.token);
+        window.location.replace("/");
+      } else {
+        alert("Error: ", responseData.error);
+      }
+    } catch(err) {
+      console.log(err)
+  }; 
 
-  if(responseData.success) {
+  /* if(responseData.success) {
     localStorage.setItem("auth-token", responseData.token);
     window.location.replace("/");
   } else {
     alert(responseData.error);
-  }
+  } */
   };
 
   const signup = async () => {
@@ -72,25 +83,28 @@ const LoginSignUp = () => {
     <div className="login-signup">
       <div className="loginsignup-container">
         <h1>{state === "Login" ? "Login" : "Sign Up"}</h1>
-        <div className="loginsignup-fields">
+        <form className="loginsignup-fields">
           {state === "Sign Up" ? 
             <input type="text" 
                    placeholder="Your Name" 
                    name="username" 
                    onChange={changeHandler}
-                   value={formData.username}/> : ""
+                   value={formData.username}
+                   autoComplete="username"/> : ""
           }
           <input type="email" 
                  placeholder="Email Address" 
                  name="email" 
                  onChange={changeHandler}
-                 value={formData.email}/>
+                 value={formData.email}
+                 autoComplete="email"/>
           <input type="password" 
                  placeholder="Password" 
                  name="password" 
                  onChange={changeHandler}
-                 value={formData.password}/>
-        </div>
+                 value={formData.password}
+                 autoComplete="current-password"/>
+        </form>
         <button onClick={()=>{state ==="Login"? login() : signup()}}>Continue</button>
         {state === "Sign Up" ? 
          <p className="loginsignup-login">
