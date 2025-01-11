@@ -30,14 +30,18 @@ const LoginSignUp = () => {
         },
         body: JSON.stringify(formData),
       });
-      if (!response.ok) {
+      /* if (!response.ok) {
         throw new Error("Failed to login");
-      }
-      console.log("response:", response) //ok
+      } */
+        if (!response.ok) {
+          const errorData = await response.json();
+          alert(`Error: ${errorData.error || "Unknown error occurred"}`);
+          return;
+        }
       responseData = await response.json();
-      console.log("responseData:", responseData)
+
       //return responseData; /////
-      if(responseData.success) {  //was success
+      if(responseData.success) {  
         localStorage.setItem("auth-token", responseData.token);
         window.location.replace("/");
       } else {
@@ -58,16 +62,18 @@ const LoginSignUp = () => {
   const signup = async () => {
     let responseData;
     try {
-    await fetch(`${REACT_APP_API_BASE_URL}/signup`, {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/signup`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    })
-      .then(res => res.json())
-      .then(data => (responseData = data))
+    });
+      if (response.ok) {
+        responseData = await response.json();
+        return responseData;
+      }
     } catch(err) {
       console.log(err.message)
     }
@@ -88,20 +94,20 @@ const LoginSignUp = () => {
             <input type="text" 
                    placeholder="Your Name" 
                    name="username" 
-                   onChange={changeHandler}
+                   onChange={(e) => changeHandler(e)}
                    value={formData.username}
                    autoComplete="username"/> : ""
           }
           <input type="email" 
                  placeholder="Email Address" 
                  name="email" 
-                 onChange={changeHandler}
+                 onChange={(e) => changeHandler(e)}
                  value={formData.email}
                  autoComplete="email"/>
           <input type="password" 
                  placeholder="Password" 
                  name="password" 
-                 onChange={changeHandler}
+                 onChange={(e) => changeHandler(e)}
                  value={formData.password}
                  autoComplete="current-password"/>
         </form>
