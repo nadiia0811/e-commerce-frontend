@@ -20,9 +20,9 @@ const LoginSignUp = () => {
   }
 
   const login = async () => {
-    let responseData, response;
+   
     try {
-       response = await fetch(`${REACT_APP_API_BASE_URL}/login`, {
+       const response = await fetch(`${REACT_APP_API_BASE_URL}/login`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -30,59 +30,48 @@ const LoginSignUp = () => {
         },
         body: JSON.stringify(formData),
       });
-      /* if (!response.ok) {
-        throw new Error("Failed to login");
-      } */
+     
         if (!response.ok) {
           const errorData = await response.json();
           alert(`Error: ${errorData.error || "Unknown error occurred"}`);
           return;
         }
-      responseData = await response.json();
+      const responseData = await response.json();
 
-      //return responseData; /////
-      if(responseData.success) {  
+      if(responseData && responseData.success) {  
         localStorage.setItem("auth-token", responseData.token);
         window.location.replace("/");
       } else {
         alert("Error: ", responseData.error);
       }
     } catch(err) {
-      console.log(err)
+      console.log("Login error: ", err)
   }; 
-
-  /* if(responseData.success) {
-    localStorage.setItem("auth-token", responseData.token);
-    window.location.replace("/");
-  } else {
-    alert(responseData.error);
-  } */
-  };
+};
 
   const signup = async () => {
-    let responseData;
+    
     try {
-    const response = await fetch(`${REACT_APP_API_BASE_URL}/signup`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-      if (response.ok) {
-        responseData = await response.json();
-        return responseData;
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/signup`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const responseData = await response.json();
+      if( responseData && responseData.success ) {
+        localStorage.setItem("auth-token", responseData.token);
+        window.location.replace("/");
+      } else {
+        alert(responseData.error);
       }
-    } catch(err) {
+      return responseData;
+    } catch (err) {
       console.log(err.message)
     }
-     if( responseData.success ) {
-      localStorage.setItem("auth-token", responseData.token);
-      window.location.replace("/");
-    } else {
-      alert(responseData.error);
-    }
+   
   };
 
   return (
